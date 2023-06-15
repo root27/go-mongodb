@@ -12,7 +12,6 @@ This is a simple package to connect to a MongoDB database.
 package main
 
 import (
-    "fmt"
     "github.com/root27/go-mongodb"
 )
 
