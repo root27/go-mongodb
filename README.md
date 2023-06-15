@@ -1,4 +1,10 @@
-## Go Package to load url from env and connect MongoDB
+## Go MongoDB
+
+---
+
+### Description
+
+This is a simple package to connect to a MongoDB database.
 
 ### Usage
 
