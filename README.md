@@ -16,9 +16,16 @@ import (
 )
 
 func main(){
-    url := mongodb.LoadEnv("mongourl") // mongourl is the env variable name
+     
 
-	db := mongodb.Connect(url)
+	db ,err:= mongodb.Connect("mongourl") // mongourl is the env variable name
+
+    if err != nil {
+        panic(err)
+    }
+
+    // db is a pointer to a mongo.Database
+    // use it to perform operations on the database
 }
 
 ```
