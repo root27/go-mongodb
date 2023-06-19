@@ -21,7 +21,10 @@ func LoadEnv(envName string) string {
 	return os.Getenv(envName)
 }
 
-func Connect(url string) *mongo.Client {
+func Connect(envName string) (*mongo.Client, error) {
+
+	url := LoadEnv(envName)
+
 	client, err := mongo.NewClient(options.Client().ApplyURI(url))
 	if err != nil {
 		log.Fatal(err)
@@ -39,5 +42,5 @@ func Connect(url string) *mongo.Client {
 		log.Fatal(err)
 	}
 	fmt.Println("Connected to MongoDB")
-	return client
+	return client, err
 }
