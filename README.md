@@ -26,6 +26,9 @@ func main(){
 
     // db is a pointer to a mongo.Database
     // use it to perform operations on the database
+
+    //Get Collection
+    collection := db.Collection(db,"dbName","collectionName")
 }
 
 ```
