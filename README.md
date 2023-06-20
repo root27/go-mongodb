@@ -28,7 +28,7 @@ func main(){
     // use it to perform operations on the database
 
     //Get Collection
-    collection := db.Collection(db,"dbName","collectionName")
+    collection := db.GetCollection(db, "databaseName","collectionName")
 }
 
 ```
