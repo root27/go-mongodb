@@ -49,3 +49,31 @@ func GetCollection(client *mongo.Client, dbName string, collectionName string) *
 	collection := client.Database(dbName).Collection(collectionName)
 	return collection
 }
+
+func Disconnect(client *mongo.Client) {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err := client.Disconnect(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Connection to MongoDB closed.")
+}
+
+func InsertOne(collection *mongo.Collection, data interface{}) (*mongo.InsertOneResult, error) {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	result, err := collection.InsertOne(ctx, data)
+	return result, err
+}
+
+func InsertMany(collection *mongo.Collection, data []interface{}) (*mongo.InsertManyResult, error) {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	result, err := collection.InsertMany(ctx, data)
+	return result, err
+}
+
+func FindOne(collection *mongo.Collection, filter interface{}) *mongo.SingleResult {
+
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	result := collection.FindOne(ctx, filter)
+	return result
+}
