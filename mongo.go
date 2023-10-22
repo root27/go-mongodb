@@ -77,3 +77,15 @@ func FindOne(collection *mongo.Collection, filter interface{}) *mongo.SingleResu
 	result := collection.FindOne(ctx, filter)
 	return result
 }
+
+func DeleteOne(collection -mongo.Collection, filter interface {}) *mongo.SingleResult {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	result := collection.DeleteOne(ctx, filter)
+	return result
+}
+
+func UpdateOne(collection -mongo.Collection, filter interface {}, update interface {}) *mongo.SingleResult {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	result := collection.UpdateOne(ctx, filter, update)
+	return result
+}
