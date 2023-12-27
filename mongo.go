@@ -46,7 +46,9 @@ func Connect(envName string) (*mongo.Client, error) {
 }
 
 func GetCollection(client *mongo.Client, dbName string, collectionName string) *mongo.Collection {
+
 	collection := client.Database(dbName).Collection(collectionName)
+
 	return collection
 }
 
@@ -74,18 +76,32 @@ func InsertMany(collection *mongo.Collection, data []interface{}) (*mongo.Insert
 func FindOne(collection *mongo.Collection, filter interface{}) *mongo.SingleResult {
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
 	result := collection.FindOne(ctx, filter)
+
 	return result
 }
 
-func DeleteOne(collection -mongo.Collection, filter interface {}) *mongo.SingleResult {
+func DeleteOne(collection *mongo.Collection, filter interface{}) (*mongo.DeleteResult, error) {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	result := collection.DeleteOne(ctx, filter)
-	return result
+	result, err := collection.DeleteOne(ctx, filter)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
 }
 
-func UpdateOne(collection -mongo.Collection, filter interface {}, update interface {}) *mongo.SingleResult {
+func UpdateOne(collection mongo.Collection, filter interface{}, update interface{}) (*mongo.UpdateResult, error) {
+
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	result := collection.UpdateOne(ctx, filter, update)
-	return result
+
+	result, err := collection.UpdateOne(ctx, filter, update)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
 }
