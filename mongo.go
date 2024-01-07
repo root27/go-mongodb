@@ -2,21 +2,30 @@ package mongodb
 
 import (
 	"context"
-	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func GetCollection(client *mongo.Client, dbName string, collectionName string) *mongo.Collection {
-
-	collection := client.Database(dbName).Collection(collectionName)
-
-	return collection
+type Client struct {
+	client *mongo.Client
 }
 
-func DeleteOne(collection *mongo.Collection, filter interface{}) (*mongo.DeleteResult, error) {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	result, err := collection.DeleteOne(ctx, filter)
+type Collection struct {
+	collection *mongo.Collection
+}
+
+func (c Client) GetCollection(dbName string, collectionName string) Collection {
+
+	collection := c.client.Database(dbName).Collection(collectionName)
+
+	newCollection := Collection{collection: collection}
+
+	return newCollection
+}
+
+func (c Collection) DeleteOne(filter interface{}) (*mongo.DeleteResult, error) {
+
+	result, err := c.collection.DeleteOne(context.TODO(), filter)
 
 	if err != nil {
 		return nil, err

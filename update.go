@@ -6,9 +6,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func UpdateOne(collection mongo.Collection, filter interface{}, update interface{}) (*mongo.UpdateResult, error) {
+func (c Collection) UpdateOne(filter interface{}, update interface{}) (*mongo.UpdateResult, error) {
 
-	result, err := collection.UpdateOne(context.TODO(), filter, update)
+	result, err := c.collection.UpdateOne(context.TODO(), filter, update)
 
 	if err != nil {
 		return nil, err
@@ -17,9 +17,9 @@ func UpdateOne(collection mongo.Collection, filter interface{}, update interface
 	return result, nil
 }
 
-func UpdateMany(collection mongo.Collection, filter interface{}, update interface{}) (*mongo.UpdateResult, error) {
+func (c Collection) UpdateMany(filter interface{}, update interface{}) (*mongo.UpdateResult, error) {
 
-	result, err := collection.UpdateMany(context.TODO(), filter, update)
+	result, err := c.collection.UpdateMany(context.TODO(), filter, update)
 
 	if err != nil {
 		return nil, err

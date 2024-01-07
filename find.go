@@ -6,16 +6,16 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func FindOne(collection *mongo.Collection, filter interface{}) *mongo.SingleResult {
+func (c Collection) FindOne(filter interface{}) *mongo.SingleResult {
 
-	result := collection.FindOne(context.TODO(), filter)
+	result := c.collection.FindOne(context.TODO(), filter)
 
 	return result
 }
 
-func FindMany(collection *mongo.Collection, filter interface{}) (*mongo.Cursor, error) {
+func (c Collection) FindMany(filter interface{}) (*mongo.Cursor, error) {
 
-	cursor, err := collection.Find(context.TODO(), filter)
+	cursor, err := c.collection.Find(context.TODO(), filter)
 
 	if err != nil {
 		return nil, err

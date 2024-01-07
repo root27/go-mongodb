@@ -28,7 +28,7 @@ func main(){
     // use it to perform operations on the database
 
     //Get Collection
-    collection := db.GetCollection(db, "databaseName","collectionName")
+    collection := db.GetCollection("databaseName","collectionName")
 }
 
 ```
@@ -55,7 +55,7 @@ func main(){
     // use it to perform operations on the database
 
     //Get Collection
-    collection := db.GetCollection(db, "databaseName","collectionName")
+    collection := db.GetCollection("databaseName","collectionName")
 
     //Insert
     err = collection.InsertOne(db, bson.M{"name": "pi", "value": 3.14159})
@@ -89,7 +89,7 @@ func main(){
     // use it to perform operations on the database
 
     //Get Collection
-    collection := db.GetCollection(db, "databaseName","collectionName")
+    collection := db.GetCollection("databaseName","collectionName")
 
     //Find
     var result bson.M
