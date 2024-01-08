@@ -12,6 +12,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+type Client struct {
+	client *mongo.Client
+}
+
+type Collection struct {
+	collection *mongo.Collection
+}
+
 func LoadEnv(envName string) string {
 	err := godotenv.Load()
 	if err != nil {
@@ -21,7 +29,7 @@ func LoadEnv(envName string) string {
 	return os.Getenv(envName)
 }
 
-func Connect(envName string) (Client, error) {
+func Connect(envName string) (*Client, error) {
 
 	url := LoadEnv(envName)
 
@@ -45,5 +53,5 @@ func Connect(envName string) (Client, error) {
 
 	newClient := Client{client: client}
 
-	return newClient, err
+	return &newClient, err
 }
